@@ -1,0 +1,63 @@
+<!doctype html><html lang="it"><head><base target="_top"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Richiedi un appuntamento · Mikal</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;padding:8px 3px 15px;background:#fffaf6;color:#5e4744;font:16px/1.7 Arial,Helvetica,sans-serif}label,legend{font-size:14px;display:block;margin-bottom:7px}input,button,select{font:inherit}input,select{border:1px solid #ddc6b9;background:#fffdfb;color:#5e4744;padding:13px 11px;width:100%;border-radius:3px;min-height:46px;font-size:16px}select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #ad8242;outline-offset:3px}input:disabled{background:#f2eae4;color:#806e69}fieldset{border:0;margin:0;padding:0;min-width:0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{margin-bottom:18px}small{display:block;color:#806e69;font-size:13px;margin:5px 0 0}fieldset.slot-group{margin:8px 0 23px}.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-height:230px;overflow:auto;padding:3px}.slot{padding:10px 4px;min-height:44px;background:#fff;border:1px solid #d9c0ae;color:#795e45;border-radius:3px;cursor:pointer;font-size:14px}.slot[aria-pressed=true]{background:#ad8242;color:white;border-color:#ad8242}.status{font-size:14px;padding:12px;background:#f7eae3;border-left:2px solid #c1995f;margin:12px 0 20px}.status.error{border-color:#b95848;color:#874339}.status:empty{display:none}.submit{width:100%;padding:15px 18px;min-height:50px;border:1px solid #ad8242;background:#ad8242;color:white;cursor:pointer;font-size:13px}.submit:disabled{cursor:not-allowed;opacity:.55}.ack{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin:0 0 20px}.ack input{width:18px;height:18px;min-height:18px;flex-shrink:0;margin:2px 0;accent-color:#ad8242}.ack a{color:#8e632a;text-underline-offset:3px}.fine{font-size:13px;color:#806e69;margin:12px 0}.success{border:1px solid #d9bb89;padding:25px;background:#f8ecde}.success h2{font:32px/1.2 Georgia,serif;margin:0 0 20px}.success p{font-size:13px}.success strong{color:#906b36}.hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);left:-9999px}[hidden]{display:none!important}button,input{-webkit-tap-highlight-color:transparent}a{color:inherit}.close-error{font-size:14px}@media(max-width:360px){.fields{grid-template-columns:1fr;gap:0}.slots{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<form id="request-form">
+ <div class="fields"><div class="field"><label for="first-name">Nome</label><input id="first-name" name="given-name" autocomplete="given-name" maxlength="80" required></div><div class="field"><label for="last-name">Cognome</label><input id="last-name" name="family-name" autocomplete="family-name" maxlength="80" required></div></div>
+ <div class="field"><label for="phone">Numero di telefono</label><input id="phone" type="tel" name="tel" autocomplete="tel" inputmode="tel" maxlength="25" placeholder="Es. 351 123 4567" required><small>Ti contatteremo a questo numero per confermare.</small></div>
+ <div class="field"><label for="service">Quale servizio desideri?</label><select id="service" name="service" required><option value="">Scegli un servizio</option><optgroup label="Taglio &amp; styling"><option>Piega + shampoo + maschera riparatrice</option><option>Piastra / ferro</option><option>Taglio donna</option><option>Ritocco taglio</option><option>Taglio bimbo (fino a 12 anni)</option><option>Acconciatura</option></optgroup><optgroup label="Colore &amp; sfumature"><option>Colore</option><option>Colore senza ammoniaca</option><option>Airtouch</option><option>Balayage / shatush / colpi di sole</option><option>Servizio gloss</option></optgroup><optgroup label="Cura &amp; trattamenti"><option>Permanente</option><option>Trattamento Olaplex</option><option>Trattamenti specifici</option></optgroup><optgroup label="Lisciatura &amp; laminazione"><option>Stiratura con cheratina brasiliana</option><option>Stiratura con nanoplastia</option><option>Altre stirature e laminazioni</option></optgroup><optgroup label="Dettagli beauty"><option>Sopracciglia / baffetti</option></optgroup><option>Laminazione e colorazione ciglia</option><option>Laminazione e colorazione sopracciglia</option></select><small>Potremo precisare insieme il trattamento e la durata quando ti ricontatteremo.</small></div>
+ <div class="field"><label for="date">Data desiderata</label><input id="date" type="date" required disabled><small>Orari del salone, fuso orario italiano.</small><small id="slot-duration">Ogni richiesta riserva 60 minuti. Confermeremo insieme la durata effettiva del trattamento.</small></div>
+ <fieldset class="slot-group"><legend>Orari disponibili</legend><div id="slots" class="slots" role="group" aria-label="Scegli un orario disponibile"></div><small id="slots-help">Collegamento al calendario in corso…</small></fieldset>
+ <label class="hp" aria-hidden="true">Sito web<input id="website" name="website" tabindex="-1" autocomplete="off"></label>
+ <label class="ack"><input id="privacy-read" type="checkbox" required><span>Ho letto l’<a id="privacy-link" href="privacy.html" target="_blank" rel="noopener">informativa sul trattamento dei dati</a>.</span></label>
+ <div id="form-status" class="status" role="status" aria-live="polite"></div>
+ <button id="submit-request" class="submit" type="submit" disabled>Invia richiesta di prenotazione</button>
+ <p class="fine">L’orario selezionato non è definitivo. Riceverai conferma tramite chiamata o messaggio entro le successive 24 ore. Nessun login e nessun pagamento online.</p>
+</form>
+<section id="success" class="success" hidden tabindex="-1"><h2>Un momento per te,<br>quasi prenotato.</h2><p id="receipt-date"></p><p><strong>La richiesta è stata ricevuta, ma l’appuntamento non è ancora confermato.</strong></p><p>Abbiamo bloccato l’orario in attesa della verifica. Ti chiameremo o ti scriveremo al numero indicato entro le successive 24 ore.</p><p id="receipt-id" class="fine"></p><p>Per modifiche o annullamenti: <a href="tel:+393517166240">351 716 6240</a> oppure <a href="tel:+393429416462">342 941 6462</a>.</p></section>
+<script>
+'use strict';
+const el=id=>document.getElementById(id);
+const rpc=typeof google!=='undefined' && google.script && google.script.run;
+let selected='',token='',inFlight=false,uncertain=false,payload=null,requestVersion=0;
+function status(message,error=false){el('form-status').textContent=message;el('form-status').classList.toggle('error',error);}
+function ready(){el('submit-request').disabled=!rpc||!token||!selected||inFlight;}
+function freeze(value){document.querySelectorAll('input,select,.slot').forEach(x=>x.disabled=value);}
+function init(){
+ if(!rpc){el('slots-help').textContent='Le disponibilità reali compariranno dopo il collegamento al calendario.';status('Prenotazioni online in attivazione. Per ora chiamaci al 351 716 6240 oppure al 342 941 6462.');return;}
+ google.script.run.withSuccessHandler(settings=>{
+   if(!settings.ok){status(settings.message,true);el('slots-help').textContent='Calendario non disponibile.';return;}
+   token=settings.token;el('slot-duration').textContent='Ogni richiesta riserva '+settings.durationMinutes+' minuti. Confermeremo insieme la durata effettiva del trattamento.';el('date').min=settings.minDate;el('date').max=settings.maxDate;el('date').disabled=false;el('privacy-link').href=settings.privacyUrl;el('slots-help').textContent='Scegli una data per vedere solo gli orari liberi.';status('');ready();
+ }).withFailureHandler(()=>{status('Non riusciamo a collegarci al calendario. Ricarica la pagina o chiamaci.',true);el('slots-help').textContent='Calendario non disponibile.';}).getBookingSettings();
+}
+function loadSlots(){
+ const date=el('date').value;selected='';el('slots').replaceChildren();ready();
+ const version=++requestVersion;
+ if(!date||!rpc)return;
+ el('slots-help').textContent='Controllo delle disponibilità…';
+ google.script.run.withSuccessHandler(res=>{
+   if(version!==requestVersion)return;
+   if(!res.ok){el('slots-help').textContent=res.message;return;}
+   el('slots-help').textContent=res.slots.length?'Scegli l’orario che preferisci. Gli spazi occupati o in attesa sono già esclusi.':'Non ci sono orari disponibili in questa data. Prova un altro giorno.';
+   for(const slot of res.slots){const b=document.createElement('button');b.type='button';b.className='slot';b.textContent=slot.time;b.setAttribute('aria-pressed','false');b.onclick=()=>{if(inFlight||uncertain)return;selected=slot.time;document.querySelectorAll('.slot').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));status('');ready()};el('slots').append(b);}
+ }).withFailureHandler(()=>{if(version===requestVersion)el('slots-help').textContent='Non riusciamo a verificare gli orari. Seleziona di nuovo la data o chiamaci.';}).getAvailability(date);
+}
+el('date').onchange=loadSlots;
+el('request-form').onsubmit=event=>{
+ event.preventDefault();if(inFlight||!rpc||!selected||!token)return;
+ if(!uncertain){if(!el('request-form').reportValidity())return;const phone=el('phone').value.replace(/[\s().-]/g,'');if(!/^\+?\d{7,15}$/.test(phone)){status('Inserisci un numero di telefono valido.',true);el('phone').focus();return;}
+ payload={firstName:el('first-name').value,lastName:el('last-name').value,phone:phone,service:el('service').value,date:el('date').value,time:selected,token:token,privacyRead:el('privacy-read').checked,website:el('website').value};}
+ inFlight=true;freeze(true);ready();status('Invio della richiesta e blocco dell’orario…');el('submit-request').textContent='Invio in corso…';
+ google.script.run.withSuccessHandler(res=>{
+  inFlight=false;
+  if(res.ok){uncertain=false;el('request-form').hidden=true;el('success').hidden=false;el('receipt-date').textContent='Orario richiesto: '+res.date.split('-').reverse().join('/')+' alle '+res.time+' · '+payload.service;el('receipt-id').textContent='Riferimento richiesta: '+res.reference;el('success').focus();return;}
+  uncertain=false;freeze(false);status(res.message,true);el('submit-request').textContent='Invia richiesta di prenotazione';
+  if(res.code==='TAKEN')loadSlots();
+  if(res.code==='EXPIRED'){token='';el('date').disabled=true;status(res.message,true);}
+  ready();
+ }).withFailureHandler(()=>{
+  inFlight=false;uncertain=true;status('Non possiamo verificare l’esito dell’invio. Premi “Verifica invio” per riprovare la stessa richiesta senza duplicarla, oppure chiamaci.',true);el('submit-request').textContent='Verifica invio';ready();
+ }).submitBooking(payload);
+};
+init();
+</script></body></html>
