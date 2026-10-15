@@ -55,3 +55,7 @@ body{font-size:17px;line-height:1.75}
 .art>img{display:block;width:100%;height:100%;object-fit:cover}
 .art-hero>img{object-position:50% 40%}
 .story-art>img{object-position:50% 22%}
+
+/* Icone disegnate: identiche su telefono e computer (niente emoji di sistema) */
+.ic{display:inline-block;width:1em;height:1em;vertical-align:-.14em;flex:none}
+.round-link .ic{width:1.1em;height:1.1em}
