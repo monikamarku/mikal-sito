@@ -16,7 +16,7 @@ if(c.tagline!=='La bellezza di sentirti te.')text('#hero-title',c.tagline);
 document.querySelectorAll('.google-link').forEach(a=>a.href=c.googleUrl);
 document.querySelectorAll('.map-link').forEach(a=>a.href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(c.address));
 document.querySelectorAll('.phone-link').forEach(a=>a.href='tel:'+c.phone.replace(/[^+\d]/g,''));
-text('.contact-phone','Salone');text('#contact-address',c.address);text('#hours',c.hours);
+text('#contact-address',c.address);text('#hours',c.hours);
 if($('#instagram')&&mediaURL(c.instagram)){$('#instagram').hidden=false;$('#instagram').href=c.instagram;}
 if($('#reviews')){
 $('#reviews').innerHTML=c.reviews.map(r=>`<article class="review-card"><div class="review-top"><span class="stars" aria-label="${r.stars} stelle su 5">${'★'.repeat(Math.max(1,Math.min(5,Number(r.stars)||5)))}</span><span class="google-mark" aria-label="Google">G</span></div><blockquote>“${esc(r.text)}”</blockquote><div class="review-author"><strong>${esc(r.name.charAt(0))}*******</strong><span>Google</span></div></article>`).join('');
